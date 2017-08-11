@@ -22,7 +22,8 @@ function categoriesReducer(state = initialState, action) {
         case types.FETCH_CATEGORIES:
             return {
                 ...state,
-                categories: action.payload.categories
+                categories: action.payload.categories,
+                isLoading:false
             };
             break;
 
@@ -31,6 +32,7 @@ function categoriesReducer(state = initialState, action) {
                 ...state,
                 categoryItem: action.payload.metadata.root,
                 subCategories: action.payload.categories,
+                isLoading:false
                 };
             break;
         case types.FETCH_PRODUCTS:
@@ -38,7 +40,8 @@ function categoriesReducer(state = initialState, action) {
             return {
                 ...state,
                 categoryProducts: action.payload.products,
-                isLoading:false
+                hasMore:(typeof action.payload.metadata !== 'undefined' && action.payload.products.length<action.payload.metadata.total),
+                isLoading:false,
             };
             break;
         case types.LOAD_MORE_PRODUCTS:
@@ -46,7 +49,9 @@ function categoriesReducer(state = initialState, action) {
                 ...state,
                 page: state.page+1,
                 categoryProducts: [...state.categoryProducts, ...action.payload.products],
-                isLoading:false
+                hasMore:(typeof action.payload.metadata !== 'undefined' && action.payload.products.length<action.payload.metadata.total),
+                isLoading:false,
+
             };
             break;
 

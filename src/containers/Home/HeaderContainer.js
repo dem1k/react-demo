@@ -18,7 +18,7 @@ class HeaderContainer extends Component {
     render() {
 
         return (
-            <div>
+
                 <header className="header">
                     <Navbar>
                         <FormGroup>
@@ -26,7 +26,7 @@ class HeaderContainer extends Component {
                         </FormGroup>
                     </Navbar>
                 </header>
-            </div>
+
         );
     }
 

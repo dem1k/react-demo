@@ -21,7 +21,7 @@ export const urls = {
 export const routes = (
   <Route path={urls.index} component={BaseContainer}>
     <IndexRoute component={HomeContainer} />
-    <Route path={urls.categories} component={CategoriesContainer} />
+    <Route path={urls.categories} component={HomeContainer} />
     <Route path={urls.categoryItem} component={CategoryDetailsContainer} />
     <Route path={urls.productItem} component={ProductDetailsContainer} />
   </Route>

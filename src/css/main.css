@@ -4,7 +4,7 @@
     height: 50px;
     width: 100%;
     opacity: 0.9;
-    z-index: 2;
+    z-index: 3;
 }
 .navbar.navbar-default input{
     width: 100%;
@@ -159,6 +159,7 @@
     border-color: #e7e7e7;
     width: 100%;
     bottom: 0;
+    z-index: 3;
 }
 .footer span{
     float: none;

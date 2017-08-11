@@ -20,16 +20,18 @@ class ProductDetailsContainer extends Component {
     }
 
     render() {
+
         const {productItem, isLoading, productId} = this.props;
-        if (isLoading == true) {
-            return (<div><p>Loading ....</p></div>);
-        }else{
+
+        if (!isLoading) {
             return (
                 <div>
-                    <img width={'100%'} src={productItem.image.sizes.Best.url} alt={productId}/>
+                    <img width={'100%'} src={productItem.image?productItem.image.sizes.Best.url:null} alt={productId}/>
                     <strong>{productItem.name}</strong>
                 </div>
             );
+        }else{
+            return (<div className="loading">Loading&#8230;</div>);
         }
     }
 
