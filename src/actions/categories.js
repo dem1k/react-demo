@@ -78,10 +78,10 @@ export function fetchProduct(productId) {
     };
 }
 export function loadMoreProducts(category, page) {
-    console.info('(category, page)>>>',category, page)
 
     let offset = (LIMIT * (page - 1))
     return (dispatch) => {
+        dispatch({ type:  types.LOADING_PRODUCTS });
         fetch(
             `${API_URL}/products/?pid=${API_PID}&limit=${LIMIT}&offset=${offset}&cat=${category}`,
             {method: 'GET'}

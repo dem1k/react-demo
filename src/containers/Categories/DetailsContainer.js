@@ -6,7 +6,9 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import StackGrid, {transitions, easings} from 'react-stack-grid';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import Waypoint from 'react-waypoint';
 import LazyLoad from 'react-lazyload';
+import Loader from '../Home/LoaderLontainer'
 import Header from '../Home/HeaderContainer'
 import Footer from '../Home/FooterContainer'
 import * as categoriesActions from '../../actions/categories';
@@ -26,27 +28,23 @@ class DetailsContainer extends Component {
 
     componentDidMount() {
         this.props.fetchCategory(this.props.categoryId);
-        this.props.fetchProducts(this.props.categoryId);
+        this.props.loadMoreProducts(this.props.categoryId, 1)
     }
 
     componentWillReceiveProps(nextProps) {
         if (nextProps.categoryId !== this.props.categoryId) {
             this.props.clearProducts();
             this.props.fetchCategory(nextProps.categoryId);
-            this.props.fetchProducts(nextProps.categoryId);
+            this.props.loadMoreProducts(nextProps.categoryId, 1)
         }
 
     }
 
     render() {
 
-        const {categoryItem, subCategories, categoryProducts, loadMoreProducts, page, hasMore, isLoading} = this.props;
+        const {categoryItem, subCategories, categoryProducts, loadMoreProducts, page, isLoading} = this.props;
+        console.log('isLoading::', isLoading)
 
-        if (isLoading) {
-            return <div>
-                <div className="loading">Loading&#8230;</div>
-            </div>
-        }
         return (
             <div>
                 <Header/>
@@ -62,41 +60,39 @@ class DetailsContainer extends Component {
                                 </li>))}
                         </ul>
                     </div>
-                    <InfiniteScroll next={()=> {
-                        loadMoreProducts(categoryItem.id, page)
-                    }}
-                                    hasMore={hasMore}
-                                    endMessage={<div>...</div>}>
 
-                        <StackGrid
-                            monitorImagesLoaded
-                            columnWidth={150}
-                            duration={600}
-                            gutterWidth={15}
-                            gutterHeight={15}
-                            easing={easings.cubicOut}
-                            appearDelay={60}
-                            appear={transition.appear}
-                            appeared={transition.appeared}
-                            enter={transition.enter}
-                            entered={transition.entered}
-                            leaved={transition.leaved}
-                        >
-                            {categoryProducts.map((product, index) => (
-                                <div>
-                                    <Link key={index} to={`/product/${product.id}`}>
-                                        <figure className="image">
-                                            <LazyLoad height={product.image.sizes.Best.height}><img
-                                                src={product.image.sizes.Best.url} alt=""/></LazyLoad>
-                                            <figcaption>{product.name}</figcaption>
-                                        </figure>
-                                    </Link>
-                                </div>
-                            ))
-                            }
-                        </StackGrid>
-                    </InfiniteScroll>
+                    <StackGrid
+                        monitorImagesLoaded
+                        columnWidth={'50%'}
+                        duration={600}
+                        gutterWidth={15}
+                        gutterHeight={15}
+                        easing={easings.cubicOut}
+                        appearDelay={60}
+                        appear={transition.appear}
+                        appeared={transition.appeared}
+                        enter={transition.enter}
+                        entered={transition.entered}
+                        leaved={transition.leaved}
+                    >
+                        {categoryProducts.map((product) => (
+                            <figure key={product.id} className="image">
+                                <img src={product.image.sizes.IPhone.url} alt=""/>
+                                <Link to={`/product/${product.id}`}>
+                                    <figcaption>{product.name}</figcaption>
+                                </Link>
+                            </figure>
+                        ))
+                        }
+                    </StackGrid>
+                    <Waypoint onEnter={()=> {
+                        if (!isLoading) {
+                            loadMoreProducts(categoryItem.id, page)
+                        }
+                    }}/>
                 </div>
+
+                <Loader isLoading={isLoading}/>
                 <Footer/>
             </div>
         );

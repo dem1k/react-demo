@@ -16,14 +16,15 @@ function categoriesReducer(state = initialState, action) {
         case types.CLEAR_PRODUCTS:
             return {
                 ...state,
-                categoryProducts: []
+                categoryProducts: [],
+
             };
             break;
         case types.FETCH_CATEGORIES:
             return {
                 ...state,
                 categories: action.payload.categories,
-                isLoading:false
+                isLoading: false
             };
             break;
 
@@ -32,25 +33,31 @@ function categoriesReducer(state = initialState, action) {
                 ...state,
                 categoryItem: action.payload.metadata.root,
                 subCategories: action.payload.categories,
-                isLoading:false
-                };
+                isLoading: false
+            };
+            break;
+        case types.LOADING_PRODUCTS:
+            return {
+                ...state,
+               isLoading: true
+            };
             break;
         case types.FETCH_PRODUCTS:
 
             return {
                 ...state,
                 categoryProducts: action.payload.products,
-                hasMore:(typeof action.payload.metadata !== 'undefined' && action.payload.products.length<action.payload.metadata.total),
-                isLoading:false,
+                hasMore: (typeof action.payload.metadata !== 'undefined' && action.payload.products.length < action.payload.metadata.total),
+                isLoading: false,
             };
             break;
         case types.LOAD_MORE_PRODUCTS:
             return {
                 ...state,
-                page: state.page+1,
+                page: state.page + 1,
                 categoryProducts: [...state.categoryProducts, ...action.payload.products],
-                hasMore:(typeof action.payload.metadata !== 'undefined' && action.payload.products.length<action.payload.metadata.total),
-                isLoading:false,
+                hasMore: (typeof action.payload.metadata !== 'undefined' && action.payload.products.length < action.payload.metadata.total),
+                isLoading: false,
 
             };
             break;
