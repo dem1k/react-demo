@@ -16,8 +16,6 @@ export function clearProducts() {
         )
             .then(response => response.json())
             .then((json) => {
-                console.log('fetchCategories DATA json:', json)
-
                 dispatch({
                     type: types.FETCH_CATEGORIES,
                     payload: json

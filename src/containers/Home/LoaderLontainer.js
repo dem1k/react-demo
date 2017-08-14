@@ -7,7 +7,6 @@ class LoaderContainer extends Component {
     };
 
     componentDidMount() {
-        console.log('did mount, props:', this.props)
     }
 
     render() {

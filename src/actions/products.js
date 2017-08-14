@@ -11,7 +11,6 @@ export function fetchProduct(productId) {
         )
             .then(response => response.json())
             .then((json) => {
-                console.log('procuct json:!!!!!>>',json);
                 dispatch({
                     type: types.FETCH_PRODUCT,
                     payload: json

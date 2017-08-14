@@ -5,9 +5,7 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
 import StackGrid, {transitions, easings} from 'react-stack-grid';
-import InfiniteScroll from 'react-infinite-scroll-component';
 import Waypoint from 'react-waypoint';
-import LazyLoad from 'react-lazyload';
 import Loader from '../Home/LoaderLontainer'
 import Header from '../Home/HeaderContainer'
 import Footer from '../Home/FooterContainer'
@@ -41,10 +39,7 @@ class DetailsContainer extends Component {
     }
 
     render() {
-
         const {categoryItem, subCategories, categoryProducts, loadMoreProducts, page, isLoading} = this.props;
-        console.log('isLoading::', isLoading)
-
         return (
             <div>
                 <Header/>
