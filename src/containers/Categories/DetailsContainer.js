@@ -35,7 +35,6 @@ class DetailsContainer extends Component {
             this.props.fetchCategory(nextProps.categoryId);
             this.props.loadMoreProducts(nextProps.categoryId, 1)
         }
-
     }
 
     render() {
