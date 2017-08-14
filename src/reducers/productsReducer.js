@@ -2,11 +2,7 @@ import * as types from '../actions/actionTypes';
 
 const initialState = {
     productItem: {},
-    // currentProduct: {},
-    // productsList: [],
-    // page: 1,
     isLoading: true,
-    // hasMore: true,
 };
 
 function productsReducer(state = initialState, action) {

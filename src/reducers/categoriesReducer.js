@@ -7,7 +7,6 @@ const initialState = {
     categoryProducts: [],
     page: 1,
     isLoading: true,
-    hasMore: true,
 };
 
 function categoriesReducer(state = initialState, action) {
@@ -47,7 +46,6 @@ function categoriesReducer(state = initialState, action) {
             return {
                 ...state,
                 categoryProducts: action.payload.products,
-                hasMore: (typeof action.payload.metadata !== 'undefined' && action.payload.products.length < action.payload.metadata.total),
                 isLoading: false,
             };
             break;
@@ -56,7 +54,6 @@ function categoriesReducer(state = initialState, action) {
                 ...state,
                 page: state.page + 1,
                 categoryProducts: [...state.categoryProducts, ...action.payload.products],
-                hasMore: (typeof action.payload.metadata !== 'undefined' && action.payload.products.length < action.payload.metadata.total),
                 isLoading: false,
 
             };

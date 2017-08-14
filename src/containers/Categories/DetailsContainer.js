@@ -23,7 +23,7 @@ class DetailsContainer extends Component {
         categoryProducts: PropTypes.array,
         page: PropTypes.number,
         isLoading: PropTypes.bool,
-        hasMore: PropTypes.bool,
+
     };
 
     componentDidMount() {
@@ -108,7 +108,6 @@ function mapStateToProps(state, ownProps) {
         subCategories: state.categoriesReducer.subCategories,
         page: state.categoriesReducer.page,
         isLoading: state.categoriesReducer.isLoading,
-        hasMore: state.categoriesReducer.hasMore,
     };
 }
 
